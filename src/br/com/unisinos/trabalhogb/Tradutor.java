@@ -46,6 +46,6 @@ public class Tradutor implements ITradutor {
 
 	@Override
 	public void salvaDicionario(String arq) {
-		
+		avl.inorder();
 	}
 }

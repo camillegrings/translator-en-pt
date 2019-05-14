@@ -113,7 +113,9 @@ public class AvlTree {
 	protected void inorder(AvlNode p) {
 		if (p != null) {
 			inorder(p.left);
-			System.out.print(p.Key+" - ");
+			System.out.print(p.Key.palavra + " - Traduções:");
+			p.Key.printDefinicoes(); 
+			System.out.print("\n");
 			inorder(p.right);
 		}
 	}
@@ -123,7 +125,9 @@ public class AvlTree {
 	}
 	protected void preorder(AvlNode p) {
 		if (p != null) {
-			System.out.print(p.Key + " ");
+			System.out.print(p.Key.palavra + " - Traduções:");
+			p.Key.printDefinicoes(); 
+			System.out.print("\n");
 			preorder(p.left);
 			preorder(p.right);
 		}
@@ -137,7 +141,10 @@ public class AvlTree {
 		if (p != null) {
 			postorder(p.left);
 			postorder(p.right);
-			System.out.print(p.Key + " ");
+			
+			System.out.print(p.Key.palavra + " - Traduções:");
+			p.Key.printDefinicoes(); 
+			System.out.print("\n");
 		}
 	}    
 }

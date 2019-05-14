@@ -13,6 +13,8 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		tradutor.salvaDicionario("teste");
 
 	}
 

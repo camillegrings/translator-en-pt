@@ -31,6 +31,10 @@ public class Dicionario {
 	}
 	
 	
+	public void printDefinicoes() {
+		definicoes.print();
+	}
+	
 	
 	
 }

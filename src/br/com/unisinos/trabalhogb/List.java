@@ -95,16 +95,15 @@ public class List {
 	   // output List contents
 	   public  void print() {
 	      if ( isEmpty() ) {
-	         System.out.println( "Empty " + name );
+	         System.out.println( "Vazio " + name );
 	         return;
 	      }
 
-	      System.out.print( "The " + name + " is: " );
 	      Node current = firstNode;
 
 	      // while not at end of list, output current node's data
 	      while ( current != null ) {
-	         System.out.print( current.getData().toString() + " " );
+	         System.out.print( current.getData().toString() + " - " );
 	         current = current.getNext();
 	      }
 
