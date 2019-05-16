@@ -110,6 +110,25 @@ public class List {
 	      System.out.println( "\n" );
 	   }
 	   
+	   public String getAsString() {
+		      if ( isEmpty() ) {
+		         return "Vazio " + name;
+		      }
+		      
+		      String listData = "";
+
+		      Node current = firstNode;
+
+		      // while not at end of list, output current node's data
+		      while ( current != null ) {
+		    	 listData += current.getData().toString() + "#";
+		         current = current.getNext();
+		      }
+		      return listData;
+		   }
+	   
+	   
+	   
 	   public boolean insertAfter(Object obj1, Object obj2){ 
 			if ( isEmpty() ) // se a lista estiver vazia 
 				return false; 

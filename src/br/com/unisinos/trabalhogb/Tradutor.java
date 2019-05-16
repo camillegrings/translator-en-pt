@@ -1,8 +1,10 @@
 package br.com.unisinos.trabalhogb;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Tradutor implements ITradutor {
@@ -45,7 +47,9 @@ public class Tradutor implements ITradutor {
 	}
 
 	@Override
-	public void salvaDicionario(String arq) {
-		avl.inorder();
+	public void salvaDicionario(String arq) throws IOException {
+		try (BufferedWriter outputStream = new BufferedWriter(new FileWriter(new File(arq)))) {
+			avl.saveInPreOrder(outputStream);
+		}
 	}
 }

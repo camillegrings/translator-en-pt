@@ -1,5 +1,6 @@
 package br.com.unisinos.trabalhogb;
 
+
 public class Dicionario {
 	protected String palavra;
 	protected List definicoes;
@@ -35,6 +36,8 @@ public class Dicionario {
 		definicoes.print();
 	}
 	
-	
-	
+	public String getDefinicoesAsString() {
+		return definicoes.getAsString();
+	}
+
 }

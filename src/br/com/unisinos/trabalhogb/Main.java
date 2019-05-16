@@ -1,6 +1,5 @@
 package br.com.unisinos.trabalhogb;
 
-import java.io.File;
 import java.io.IOException;
 
 
@@ -14,7 +13,12 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		tradutor.salvaDicionario("teste");
+		try {
+			tradutor.salvaDicionario("dicionario2.dat");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

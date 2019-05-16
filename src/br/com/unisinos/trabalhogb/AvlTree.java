@@ -1,5 +1,8 @@
 package br.com.unisinos.trabalhogb;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class AvlTree {
 
 	private AvlNode root = null;
@@ -107,44 +110,46 @@ public class AvlTree {
 		return null;
 	}*/
 
-	public void inorder() {
-		inorder(root);
+//	public void inorder() {
+//		inorder(root);
+//	}
+//	protected void inorder(AvlNode p) {
+//		if (p != null) {
+//			inorder(p.left);
+//			System.out.print(p.Key.palavra + " - Traduções:");
+//			p.Key.printDefinicoes(); 
+//			System.out.print("\n");
+//			inorder(p.right);
+//		}
+//	}
+
+	public void saveInPreOrder(BufferedWriter outputStream) throws IOException {
+		preOrder(root, outputStream);
 	}
-	protected void inorder(AvlNode p) {
-		if (p != null) {
-			inorder(p.left);
-			System.out.print(p.Key.palavra + " - Traduções:");
-			p.Key.printDefinicoes(); 
-			System.out.print("\n");
-			inorder(p.right);
+
+	protected void preOrder(AvlNode node, BufferedWriter outputStream) throws IOException {
+		String line;
+		if (node != null) {
+			line = node.Key.palavra + "#" + node.Key.getDefinicoesAsString();
+			outputStream.write(line);
+			outputStream.newLine();
+			preOrder(node.left, outputStream);
+			preOrder(node.right, outputStream);
 		}
 	}
 
-	public void preorder() {
-		preorder(root);
-	}
-	protected void preorder(AvlNode p) {
-		if (p != null) {
-			System.out.print(p.Key.palavra + " - Traduções:");
-			p.Key.printDefinicoes(); 
-			System.out.print("\n");
-			preorder(p.left);
-			preorder(p.right);
-		}
-	}
-
-	public void postorder() {
-		postorder(root);
-	}
-
-	protected void postorder(AvlNode p) {
-		if (p != null) {
-			postorder(p.left);
-			postorder(p.right);
-			
-			System.out.print(p.Key.palavra + " - Traduções:");
-			p.Key.printDefinicoes(); 
-			System.out.print("\n");
-		}
-	}    
+//	public void postorder() {
+//		postorder(root);
+//	}
+//
+//	protected void postorder(AvlNode p) {
+//		if (p != null) {
+//			postorder(p.left);
+//			postorder(p.right);
+//			
+//			System.out.print(p.Key.palavra + " - Traduções:");
+//			p.Key.printDefinicoes(); 
+//			System.out.print("\n");
+//		}
+//	}    
 }
