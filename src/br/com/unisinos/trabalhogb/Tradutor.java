@@ -37,7 +37,8 @@ public class Tradutor implements ITradutor {
 	@Override
 	public List traduzPalavra(String palavra) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return this.avl.buscaPalavra(palavra).Key.definicoes;
 	}
 
 	@Override

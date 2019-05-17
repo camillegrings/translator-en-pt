@@ -116,18 +116,48 @@ public class AvlTree {
 		return rotateSimpleToLeft( k1 );
 	}
 
-	/*public AvlNode search(String palavra) {
-		return search(root,palavra);
-	}*/
+	public AvlNode buscaPalavra(String palavra) {
+		//Inicia pela raíz a pesquisa pela palavra
+		return buscaPalavra( root,palavra );
+	}
 	
-	/*protected AvlNode search(AvlNode p, String palavra) {
-		while (p != null) {
-			if (palavra.compareTo(p.Key.getPalavra()) == 0) return p;
-			else if (palavra.compareTo(p.Key.getPalavra()) < 0) p = p.left;
-			else p = p.right;
+	protected AvlNode buscaPalavra(AvlNode node, String palavra) {
+		
+		if ( node == null ) {
+			return null;
 		}
-		return null;
-	}*/
+		else {
+			
+			if ( palavra.compareTo( node.Key.getPalavra() ) == 0 ) {
+				return node;
+			}
+			else if ( palavra.compareTo( node.Key.getPalavra() ) < 0 ) {
+				node = buscaPalavra ( node.left, palavra );
+				return node;
+			}
+			else {
+				node = buscaPalavra ( node.right, palavra );
+				return node;
+			}
+		}
+		
+		/*while ( node != null ) {
+		
+			if ( palavra.compareTo( node.Key.getPalavra() ) == 0) 
+			
+				return node;
+			
+			else if ( palavra.compareTo( node.Key.getPalavra() ) < 0 ) 
+			
+				node = node.left;
+			
+			else 
+			
+				node = node.right;
+		}
+		
+		return null;*/
+	}
 
 //	public void inorder() {
 //		inorder(root);
