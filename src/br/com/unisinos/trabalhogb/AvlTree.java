@@ -26,7 +26,7 @@ public class AvlTree {
 		if (node == null)
 			return -1; //Se o nodo é null, retorna -1
 		else
-			return node.height;
+			return node.getHeight();
 	}
 
 	private static int getMaior( int leftNode, int rightNode ) {
@@ -39,7 +39,7 @@ public class AvlTree {
 	private int getFactor (AvlNode node) {
 		//Se node for null, left retorna -1, right retorna -1, na expressão (-1)-(-1) = 0
 		//Se algum dos nodes estiver preenchido, usa o seu atributo de altura
-		return height( node.left ) - height( node.right );
+		return height( node.getLeft() ) - height( node.getRight() );
 	}
 	
 	public boolean insert (Dicionario d) {
@@ -56,7 +56,7 @@ public class AvlTree {
 		//Se a chave do objeto for > 0, significa que a chave do objeto a ser inserido é menor que a chave existente,
 		//portanto, insere a esquerda
 		else if( d.compareTo(node.Key) > 0 ) { 
-			node.left = insert( d, node.left );
+			node.setHeight(insert( d, node.getLeft() ));
 		}
 		//Se a chave do objeto for < 0, a chave do objeto a ser inserido é maior que a chave existente, logo insere a direita
 		else if( d.compareTo(node.Key) < 0) {
@@ -159,46 +159,18 @@ public class AvlTree {
 		return null;*/
 	}
 
-//	public void inorder() {
-//		inorder(root);
-//	}
-//	protected void inorder(AvlNode p) {
-//		if (p != null) {
-//			inorder(p.left);
-//			System.out.print(p.Key.palavra + " - Traduções:");
-//			p.Key.printDefinicoes(); 
-//			System.out.print("\n");
-//			inorder(p.right);
-//		}
-//	}
-
 	public void saveInPreOrder(BufferedWriter outputStream) throws IOException {
-		preOrder(root, outputStream);
+		saveInPreOrder(root, outputStream);
 	}
 
-	protected void preOrder(AvlNode node, BufferedWriter outputStream) throws IOException {
+	protected void saveInPreOrder(AvlNode node, BufferedWriter outputStream) throws IOException {
 		String line;
 		if (node != null) {
 			line = node.Key.palavra + "#" + node.Key.getDefinicoesAsString();
 			outputStream.write(line);
 			outputStream.newLine();
-			preOrder(node.left, outputStream);
-			preOrder(node.right, outputStream);
+			saveInPreOrder(node.left, outputStream);
+			saveInPreOrder(node.right, outputStream);
 		}
-	}
-
-//	public void postorder() {
-//		postorder(root);
-//	}
-//
-//	protected void postorder(AvlNode p) {
-//		if (p != null) {
-//			postorder(p.left);
-//			postorder(p.right);
-//			
-//			System.out.print(p.Key.palavra + " - Traduções:");
-//			p.Key.printDefinicoes(); 
-//			System.out.print("\n");
-//		}
-//	}    
+	}  
 }

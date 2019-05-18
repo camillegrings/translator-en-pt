@@ -13,20 +13,13 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		/*try {
+		tradutor.traduzPalavra("rambling");
+		
+		try {
 			tradutor.salvaDicionario("dicionario2.dat");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		AvlNode avl = tradutor.avl.buscaPalavra("rambling");
-		if ( avl == null ) {
-			System.out.println ( "Palavra não encontrada" );
-		}else {
-			avl.Key.definicoes.print();	
 		}
-		
-
 	}
-
 }

@@ -6,7 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-/*Mensagem aos humanos: "Estou com fome!"*/
+import java.util.Scanner;
+
 public class Tradutor implements ITradutor {
 	protected AvlTree avl;
 	
@@ -35,16 +36,39 @@ public class Tradutor implements ITradutor {
 	}
 
 	@Override
-	public List traduzPalavra(String palavra) {
-		// TODO Auto-generated method stub
+	public void traduzPalavra(String palavra) {
+		AvlNode node = avl.buscaPalavra(palavra);
+		if ( node == null ) {
+			System.out.println ("Palavra não encontrada");
 		
-		return this.avl.buscaPalavra(palavra).Key.definicoes;
+			Scanner reader = new Scanner(System.in);
+			System.out.println("Deseja inserir essa palavra? (y/n)");
+			String output = reader.next();
+			reader.close();
+			if (output == "y") {
+				//TODO incluir inserção de palavra na árvore
+			}
+		} else {
+			node.getKey().definicoes.print();
+			System.out.println("Deseja inserir essa palavra?");
+		}
 	}
 
 	@Override
 	public void insereTraducao(String palavra, List definicoes) {
-		// TODO Auto-generated method stub
-
+		AvlNode node = avl.buscaPalavra(palavra);
+		if ( node == null ) {
+			// TODO: incluir inserção
+		} else {
+			Scanner reader = new Scanner(System.in);
+			System.out.println("Essa palavra já existe.");
+			System.out.println("Deseja incluir essas traduções à palavra? (y/n)");
+			String output = reader.next();
+			reader.close();
+			if (output.equals("y")) {
+				node.getKey().definicoes.insertAtBack(definicoes);
+			}
+		}
 	}
 
 	@Override
