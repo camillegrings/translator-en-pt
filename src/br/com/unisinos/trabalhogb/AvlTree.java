@@ -6,27 +6,30 @@ import java.io.IOException;
 public class AvlTree {
 
 	private AvlNode root = null;
-
+    
+	//Construtor da Avl Tree
 	public AvlTree() {
 		root = null;
 	}
 
 	private static int height(AvlNode node) {
 		if (node == null)
-			return -1; // Se o nodo é null, retorna -1
+			return -1; // Se o nodo ï¿½ null, retorna -1
 		else
 			return node.getHeight();
 	}
 
+	//Compara as alturas de dois nodes e retorna a maior altura entre eles
 	private static int getBiggerNode(int leftNode, int rightNode) {
 		if (leftNode > rightNode)
 			return leftNode;
 		else
 			return rightNode;
 	}
-
+	
+	//Calcula o fator do node visitado
 	private int getFactor(AvlNode node) {
-		// Se node for null, left retorna -1, right retorna -1, na expressão (-1)-(-1) =
+		// Se node for null, left retorna -1, right retorna -1, na expressï¿½o (-1)-(-1) =
 		// 0
 		// Se algum dos nodes estiver preenchido, usa o seu atributo de altura
 		return height(node.getLeft()) - height(node.getRight());
@@ -41,31 +44,31 @@ public class AvlTree {
 		if (node == null) {
 			node = new AvlNode(d, null, null);
 		}
-		// Compara a key do objeto a ser inserido com a key já existente na árvore:
+		// Compara a key do objeto a ser inserido com a key jï¿½ existente na ï¿½rvore:
 		// Se a chave do objeto for > 0, significa que a chave do objeto a ser inserido
-		// é menor que a chave existente,
+		// ï¿½ menor que a chave existente,
 		// portanto, insere a esquerda
 		else if (d.compareTo(node.getKey()) > 0) {
 			node.setLeft((insert(d, node.getLeft())));
 		}
-		// Se a chave do objeto for < 0, a chave do objeto a ser inserido é maior que a
+		// Se a chave do objeto for < 0, a chave do objeto a ser inserido ï¿½ maior que a
 		// chave existente, logo insere a direita
 		else if (d.compareTo(node.getKey()) < 0) {
 			node.setRight(insert(d, node.getRight()));
 		}
-		// Após realizada a operação de inserção, verifica o fator do node para
-		// determinar se a árvore está balanceada
-		if (getFactor(node) == 2) { // Se o fator for 2, a árvore não está balanceada
-			if (getFactor(node.getLeft()) > 0) // Sendo o fator da sub-arvore à esquerda positivo, faz rotação simples à
+		// Apï¿½s realizada a operaï¿½ï¿½o de inserï¿½ï¿½o, verifica o fator do node para
+		// determinar se a ï¿½rvore estï¿½ balanceada
+		if (getFactor(node) == 2) { // Se o fator for 2, a ï¿½rvore nï¿½o estï¿½ balanceada
+			if (getFactor(node.getLeft()) > 0) // Sendo o fator da sub-arvore ï¿½ esquerda positivo, faz rotaï¿½ï¿½o simples ï¿½
 												// direita
 				node = rotateSimpleToRight(node);
-			else // Senão, faz rotação dupla à direita
+			else // Senï¿½o, faz rotaï¿½ï¿½o dupla ï¿½ direita
 				node = rotateDoubleToRight(node);
-		} else if (getFactor(node) == -2) {// Se o fator for -2, a árvore não está balanceada
-			if (getFactor(node.getRight()) < 0) // Sendo o fator da sub-arvore à direita negativo, faz rotação simples à
+		} else if (getFactor(node) == -2) {// Se o fator for -2, a ï¿½rvore nï¿½o estï¿½ balanceada
+			if (getFactor(node.getRight()) < 0) // Sendo o fator da sub-arvore ï¿½ direita negativo, faz rotaï¿½ï¿½o simples ï¿½
 												// direita
 				node = rotateSimpleToLeft(node);
-			else // Senão, faz rotação dupla à esquerda
+			else // Senï¿½o, faz rotaï¿½ï¿½o dupla ï¿½ esquerda
 				node = rotateDoubleToLeft(node);
 		}
 
@@ -83,10 +86,10 @@ public class AvlTree {
 		AvlNode k1 = k2.getLeft();// Filho esquerdo de K2 vira pai
 		k2.setLeft(k1.getRight()); // Filho direito de k1 vira filho esquerdo de k2
 		k1.setRight(k2); // k2 vira filho direito de k1
-		k2.setHeight(getBiggerNode(height(k2.getLeft()), height(k2.getRight())) + 1); // A altura de k2 é definida pela maior
+		k2.setHeight(getBiggerNode(height(k2.getLeft()), height(k2.getRight())) + 1); // A altura de k2 ï¿½ definida pela maior
 																					// altura entre suas sub arvores
 																					// direita e esquerda, + 1
-		k1.setHeight(getBiggerNode(height(k1.getLeft()), k2.getHeight()) + 1); // A altura de k1 é determinada pela maior
+		k1.setHeight(getBiggerNode(height(k1.getLeft()), k2.getHeight()) + 1); // A altura de k1 ï¿½ determinada pela maior
 																			// altura entre a altura de k2 e a altura da
 																			// sub arvore esquerda de k1
 		return k1; // Retorna o node rotacionado
@@ -112,12 +115,17 @@ public class AvlTree {
 	}
 
 	public AvlNode buscaPalavra(String palavra) {
-		// Inicia pela raíz a pesquisa pela palavra
+		// Inicia pela raï¿½z a pesquisa pela palavra
 		return buscaPalavra(root, palavra);
 	}
 
 	protected AvlNode buscaPalavra(AvlNode node, String palavra) {
-		if (node == null)
+		/*
+		 * Percorre a ï¿½rvore para a direita ou esquerda (depende da palavra pesquisada).
+		 * Assim que achar a palavra retorna o node
+		 * 
+		 * */
+		if ( node == null ) {
 			return null;
 
 		if (palavra.compareTo(node.getKey().getPalavra()) == 0) {
