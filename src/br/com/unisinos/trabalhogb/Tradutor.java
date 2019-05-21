@@ -10,17 +10,17 @@ import java.util.Scanner;
 
 public class Tradutor implements ITradutor {
 	protected AvlTree avl;
-	
+
 	public Tradutor() {
 		this.avl = new AvlTree();
 	}
 
 	protected void carregaDicionario(String arq) throws IOException {
-		//Carregar Arquivo
+		// Carregar Arquivo
 		try (BufferedReader inputStream = new BufferedReader(new FileReader(new File(arq)))) {
 			String line;
 
-			//Separa a linha em palavra em Inglês e suas traduções
+			// Separa a linha em palavra em Inglês e suas traduções
 			while ((line = inputStream.readLine()) != null) {
 				String[] palavras = line.split("#");
 				String palavraIngles = palavras[0];
@@ -38,18 +38,18 @@ public class Tradutor implements ITradutor {
 	@Override
 	public void traduzPalavra(String palavra) {
 		AvlNode node = avl.buscaPalavra(palavra);
-		if ( node == null ) {
-			System.out.println ("Palavra não encontrada");
-		
+		if (node == null) {
+			System.out.println("Palavra não encontrada");
+
 			Scanner reader = new Scanner(System.in);
 			System.out.println("Deseja inserir essa palavra? (y/n)");
 			String output = reader.next();
 			reader.close();
 			if (output == "y") {
-				//TODO incluir inserção de palavra na árvore
+				// TODO incluir inserção de palavra na árvore
 			}
 		} else {
-			node.getKey().definicoes.print();
+			node.getKey().getDefinicoes().print();
 			System.out.println("Deseja inserir essa palavra?");
 		}
 	}
@@ -57,7 +57,7 @@ public class Tradutor implements ITradutor {
 	@Override
 	public void insereTraducao(String palavra, List definicoes) {
 		AvlNode node = avl.buscaPalavra(palavra);
-		if ( node == null ) {
+		if (node == null) {
 			// TODO: incluir inserção
 		} else {
 			Scanner reader = new Scanner(System.in);
@@ -66,7 +66,7 @@ public class Tradutor implements ITradutor {
 			String output = reader.next();
 			reader.close();
 			if (output.equals("y")) {
-				node.getKey().definicoes.insertAtBack(definicoes);
+				node.getKey().getDefinicoes().insertAtBack(definicoes);
 			}
 		}
 	}

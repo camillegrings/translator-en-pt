@@ -2,8 +2,8 @@ package br.com.unisinos.trabalhogb;
 
 
 public class Dicionario {
-	protected String palavra;
-	protected List definicoes;
+	private String palavra;
+	private List definicoes;
 	
 	public Dicionario(String palavra, List definicoes) {
 		this.palavra = palavra;

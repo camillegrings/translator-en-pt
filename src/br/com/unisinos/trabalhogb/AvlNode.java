@@ -1,52 +1,52 @@
 package br.com.unisinos.trabalhogb;
 
-    public class AvlNode {
-    	
-    	private int height;
-    	private Dicionario Key;
-    	private AvlNode left, right;
+public class AvlNode {
 
-        public AvlNode ( Dicionario d ) {
-            this( d, null, null );
-        }
+	private int height;
+	private Dicionario Key;
+	private AvlNode left, right;
 
-        public AvlNode ( Dicionario d, AvlNode lt, AvlNode rt ) {
-            Key  = d;
-        	left = lt;
-            right = rt;
-            height   = 0;
-        }
+	public AvlNode(Dicionario dicionario) {
+		this(dicionario, null, null);
+	}
 
-		public int getHeight() {
-			return height;
-		}
+	public AvlNode(Dicionario dicionario, AvlNode left, AvlNode right) {
+		this.Key = dicionario;
+		this.left = left;
+		this.right = right;
+		this.height = 0;
+	}
 
-		public void setHeight(int height) {
-			this.height = height;
-		}
+	public int getHeight() {
+		return height;
+	}
 
-		public Dicionario getKey() {
-			return Key;
-		}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
-		public void setKey(Dicionario key) {
-			Key = key;
-		}
+	public Dicionario getKey() {
+		return Key;
+	}
 
-		public AvlNode getLeft() {
-			return left;
-		}
+	public void setKey(Dicionario key) {
+		Key = key;
+	}
 
-		public void setLeft(AvlNode left) {
-			this.left = left;
-		}
+	public AvlNode getLeft() {
+		return left;
+	}
 
-		public AvlNode getRight() {
-			return right;
-		}
+	public void setLeft(AvlNode left) {
+		this.left = left;
+	}
 
-		public void setRight(AvlNode right) {
-			this.right = right;
-		}
-        
-    }
+	public AvlNode getRight() {
+		return right;
+	}
+
+	public void setRight(AvlNode right) {
+		this.right = right;
+	}
+
+}
