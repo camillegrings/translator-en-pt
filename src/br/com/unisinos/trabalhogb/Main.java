@@ -14,6 +14,15 @@ public class Main {
 		}
 		
 		tradutor.traduzPalavra("rambling");
+		tradutor.traduzPalavra("hello");
+		
+		List definicoesCar = new List();
+		definicoesCar.insertAtBack("carro");
+		tradutor.insereTraducao("car", definicoesCar);
+		
+		List definicoesRambling = new List();
+		definicoesRambling.insertAtBack("divagar");
+		tradutor.insereTraducao("rambling", definicoesRambling);
 		
 		try {
 			tradutor.salvaDicionario("dicionario2.dat");
