@@ -161,11 +161,16 @@ public class AvlTree {
 		
 		return buscaPalavra ( node.getRight(), palavra );
 	}
-
+    /*
+     * Gatilho para realizar o save recursivo 
+     */
 	public void saveInPreOrder(BufferedWriter outputStream) throws IOException {
 		saveInPreOrder(root, outputStream);
 	}
-
+    /*
+     * Salvar em pre ordem as palavras e definicoes no arquivo.
+     * Visita raiz, salva no arquivo, percorre para a esquerda, quando não achar mais vai para a direita 
+     */
 	protected void saveInPreOrder(AvlNode node, BufferedWriter outputStream) throws IOException {
 		String line;
 		if (node != null) {
