@@ -1,3 +1,10 @@
+/* (22/05/2019) Jeferson Michelin:
+ * Removi os inputs de teclado e joguei do Tradutor e joguei no Main
+ * O método traduzPalavra, precisava retornar um List, então alterei ele
+ * Testei os demais casos lá no main e estão funcionando, podemos dar uma melhorada no código depois pq ficou bem feio haha
+ * Tbm vamos precisar fazer um delete lá avl :(
+ * */
+
 package br.com.unisinos.trabalhogb;
 
 import java.io.BufferedReader;
@@ -9,6 +16,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Tradutor implements ITradutor {
+	
 	protected AvlTree avl;
 
 	public Tradutor() {
@@ -35,8 +43,8 @@ public class Tradutor implements ITradutor {
 		}
 	}
 
-	@Override
-	public void traduzPalavra(String palavra) {
+
+/*	public void traduzPalavra(String palavra) {
 		AvlNode node = avl.buscaPalavra(palavra);
 		if (node == null) {
 			System.out.println("Palavra " + palavra +  " não encontrada");
@@ -53,23 +61,38 @@ public class Tradutor implements ITradutor {
 		} else {
 			node.getKey().getDefinicoes().print();
 		}
-	}
+	}*/
+	@Override
+	public List traduzPalavra(String palavra) {
+		
+		AvlNode node = avl.buscaPalavra(palavra);
+	    if ( node == null ) {
+	    	return null;
+	    }else {
+	    	return node.getKey().getDefinicoes();	
+	    }
+		
+	}	
 
 	@Override
 	public void insereTraducao(String palavra, List definicoes) {
+		
 		AvlNode node = avl.buscaPalavra(palavra);
+		
 		if (node == null) {
+		
 			criaNovoDicionario(palavra, definicoes);
 			System.out.println("Palavra " + palavra + " incluída com sucesso.");
+		
 		} else {
-			Scanner reader = new Scanner(System.in);
+			//Scanner reader = new Scanner(System.in);
 			System.out.println("Essa palavra já existe.");
-			System.out.println("Deseja incluir essas definições à palavra? (y/n)");
-			String output = reader.next();
-			reader.close();
-			if (output.equals("y")) {
-				node.getKey().getDefinicoes().insertAtBack(definicoes);
-			}
+			//System.out.println("Deseja incluir essas definições à palavra? (y/n)");
+			//String output = reader.next();
+			//reader.close();
+			//if (output.equals("y")) {
+			//	node.getKey().getDefinicoes().insertAtBack(definicoes);
+			//}
 		}
 	}
 
@@ -85,7 +108,10 @@ public class Tradutor implements ITradutor {
 		avl.insert(novoDicionario);
 	}
 	
-	private List insereDefinicoes(String palavra) {
+	public AvlTree getTree() {
+		return avl;
+	}
+	/*private List insereDefinicoes(String palavra) {
 		String output;
 		List novaLista = new List();
 		Scanner reader = new Scanner(System.in);
@@ -98,5 +124,5 @@ public class Tradutor implements ITradutor {
 		} while (!output.equals("n"));
 		reader.close();
 		return novaLista;
-	}
+	}*/
 }
