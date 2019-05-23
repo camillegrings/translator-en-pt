@@ -1,10 +1,3 @@
-/* (22/05/2019) Jeferson Michelin:
- * Removi os inputs de teclado e joguei do Tradutor e joguei no Main
- * O método traduzPalavra, precisava retornar um List, então alterei ele
- * Testei os demais casos lá no main e estão funcionando, podemos dar uma melhorada no código depois pq ficou bem feio haha
- * Tbm vamos precisar fazer um delete lá avl :(
- * */
-
 package br.com.unisinos.trabalhogb;
 
 import java.io.BufferedReader;
@@ -13,11 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Tradutor implements ITradutor {
-	
-	protected AvlTree avl;
+	private AvlTree avl;
 
 	public Tradutor() {
 		this.avl = new AvlTree();
@@ -44,66 +35,38 @@ public class Tradutor implements ITradutor {
 	}
 
 
-/*	public void traduzPalavra(String palavra) {
-		AvlNode node = avl.buscaPalavra(palavra);
-		if (node == null) {
-			System.out.println("Palavra " + palavra +  " não encontrada");
-
-			Scanner reader = new Scanner(System.in);
-			System.out.println("Deseja inserir essa palavra? (y/n)");
-			String output = reader.next();
-			if (output.equals("y")) {
-				List novasDefinicoes = insereDefinicoes(palavra);
-				criaNovoDicionario(palavra, novasDefinicoes);
-				System.out.println("Palavra incluída com sucesso.");
-			}
-			reader.close();
-		} else {
-			node.getKey().getDefinicoes().print();
-		}
-	}*/
 	@Override
 	public List traduzPalavra(String palavra) {
-		
+		// Busca a palavra, se existir retorna a lista das definições, se não retorna nulo
 		AvlNode node = avl.buscaPalavra(palavra);
-	    if ( node == null ) {
-	    	return null;
-	    }else {
-	    	return node.getKey().getDefinicoes();	
-	    }
-		
+	    return node == null ? null : node.getKey().getDefinicoes();
 	}	
 
 	@Override
 	public void insereTraducao(String palavra, List definicoes) {
-		
+		// Procura se a palavra (chave) já existe
+		// Se não existe, o dicionario é criado e inserido na avl
+		// Se já existe, não será possível inserir pois uma avl não aceita chaves duplicadas
 		AvlNode node = avl.buscaPalavra(palavra);
 		
 		if (node == null) {
-		
 			criaNovoDicionario(palavra, definicoes);
 			System.out.println("Palavra " + palavra + " incluída com sucesso.");
-		
 		} else {
-			//Scanner reader = new Scanner(System.in);
 			System.out.println("Essa palavra já existe.");
-			//System.out.println("Deseja incluir essas definições à palavra? (y/n)");
-			//String output = reader.next();
-			//reader.close();
-			//if (output.equals("y")) {
-			//	node.getKey().getDefinicoes().insertAtBack(definicoes);
-			//}
 		}
 	}
 
 	@Override
 	public void salvaDicionario(String arq) throws IOException {
+		// Salva a avl no arquivo
 		try (BufferedWriter outputStream = new BufferedWriter(new FileWriter(new File(arq)))) {
 			avl.saveInPreOrder(outputStream);
 		}
 	}
 	
 	private void criaNovoDicionario(String palavra, List definicoes) {
+		// Cria o dicionario com palavra e definicoes, e insere na avl
 		Dicionario novoDicionario = new Dicionario(palavra, definicoes);
 		avl.insert(novoDicionario);
 	}
@@ -111,18 +74,4 @@ public class Tradutor implements ITradutor {
 	public AvlTree getTree() {
 		return avl;
 	}
-	/*private List insereDefinicoes(String palavra) {
-		String output;
-		List novaLista = new List();
-		Scanner reader = new Scanner(System.in);
-		do {
-			System.out.println("Digite a definição da palavra " + palavra + ":");
-			String definicao = reader.next();
-			novaLista.insertAtBack(definicao);
-			System.out.println("Deseja inserir mais uma definição? (y/n)");
-			output = reader.next();
-		} while (!output.equals("n"));
-		reader.close();
-		return novaLista;
-	}*/
 }

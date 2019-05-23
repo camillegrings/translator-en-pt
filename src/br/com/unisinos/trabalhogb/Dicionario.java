@@ -11,6 +11,7 @@ public class Dicionario {
 	}
 
 	public int compareTo(Object o) {
+		//Compara palavra (chave da avl)
 		Dicionario dicionario = (Dicionario) o;
 		return dicionario.getPalavra().compareTo(this.getPalavra());
 	}
@@ -33,10 +34,12 @@ public class Dicionario {
 	
 	
 	public void printDefinicoes() {
+		// Printa as Definições com Syso
 		definicoes.print();
 	}
 	
 	public String getDefinicoesAsString() {
+		//Concatena as definições em uma String, separando as definições com #
 		return definicoes.getAsString();
 	}
 
